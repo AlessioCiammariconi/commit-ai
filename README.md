@@ -51,6 +51,22 @@ commit-ai
 
 That's it. Pick one of the 3 generated messages, edit manually, or cancel.
 
+### Flags
+
+```bash
+commit-ai --reset-key   # remove saved API key and enter a new one
+commit-ai --version     # show version
+commit-ai --help        # show help
+```
+
+### Environment variable
+
+If you prefer not to save the key on disk (e.g. CI/CD), set it via env:
+
+```bash
+GROQ_API_KEY=gsk_... commit-ai
+```
+
 ---
 
 ## How it works
