@@ -1,5 +1,5 @@
 {
-  "name": "commit-ai",
+  "name": "@alessiociammariconi/commit-ai",
   "version": "0.1.0",
   "description": "AI-powered git commit message generator using Groq (free tier)",
   "type": "module",
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build"
   },
   "keywords": ["git", "commit", "ai", "cli", "conventional-commits", "groq"],
   "author": "Alessio Ciammariconi",

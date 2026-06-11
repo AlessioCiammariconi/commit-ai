@@ -12,8 +12,8 @@ Rules:
 - Use imperative mood ("add" not "added")
 - Scope is optional but use it when obvious from the diff
 
-Respond with ONLY a JSON array of 3 strings, nothing else.
-Example: ["feat(auth): add JWT refresh token rotation", "fix(auth): handle expired token edge case", "refactor(auth): simplify token validation logic"]`;
+Respond with a JSON object in this exact format:
+{"messages": ["message1", "message2", "message3"]}`;
 
 export async function generateCommitMessages(
   apiKey: string,
@@ -29,21 +29,28 @@ export async function generateCommitMessages(
     ],
     temperature: 0.7,
     max_tokens: 256,
+    response_format: { type: "json_object" },
   });
 
   const content = response.choices[0]?.message?.content ?? "";
 
-  // Estrae il JSON array dalla risposta
-  const match = content.match(/\[.*\]/s);
-  if (!match) throw new Error("Could not parse AI response");
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(content);
+  } catch {
+    throw new Error("Could not parse AI response");
+  }
 
-  const parsed: unknown = JSON.parse(match[0]);
-  if (!Array.isArray(parsed) || parsed.length === 0) {
+  if (
+    typeof parsed !== "object" ||
+    parsed === null ||
+    !Array.isArray((parsed as { messages?: unknown }).messages)
+  ) {
     throw new Error("Invalid AI response format");
   }
 
   // Valida che ogni elemento sia una stringa non vuota
-  const messages = (parsed as unknown[])
+  const messages = ((parsed as { messages: unknown[] }).messages)
     .filter((m): m is string => typeof m === "string" && m.trim().length > 0)
     .slice(0, 3);
 

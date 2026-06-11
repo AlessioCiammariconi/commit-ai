@@ -25,7 +25,7 @@ Pick a commit message:
 ## Install
 
 ```bash
-npm install -g commit-ai
+npm install -g @alessiociammariconi/commit-ai
 ```
 
 Requires Node.js 18+.
@@ -76,4 +76,4 @@ The diff is truncated at 15,000 characters before being sent to avoid hitting co
 
 ## License
 
-MIT © [Alessio Ciammariconi](https://github.com/ciammariconi)
+MIT © [Alessio Ciammariconi](https://github.com/AlessioCiammariconi)
