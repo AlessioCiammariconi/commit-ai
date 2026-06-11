@@ -1,0 +1,33 @@
+{
+  "name": "commit-ai",
+  "version": "0.1.0",
+  "description": "AI-powered git commit message generator using Groq (free tier)",
+  "type": "module",
+  "bin": {
+    "commit-ai": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "keywords": ["git", "commit", "ai", "cli", "conventional-commits", "groq"],
+  "author": "Alessio Ciammariconi",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "dependencies": {
+    "@clack/prompts": "^1.5.1",
+    "groq-sdk": "^1.2.1",
+    "simple-git": "^3.36.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
+  }
+}
