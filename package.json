@@ -16,6 +16,14 @@
   "engines": {
     "node": ">=18"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlessioCiammariconi/commit-ai.git"
+  },
+  "homepage": "https://github.com/AlessioCiammariconi/commit-ai#readme",
+  "bugs": {
+    "url": "https://github.com/AlessioCiammariconi/commit-ai/issues"
+  },
   "files": [
     "dist",
     "README.md"
