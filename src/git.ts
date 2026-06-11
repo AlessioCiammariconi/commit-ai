@@ -11,8 +11,9 @@ const SECRET_PATTERNS = [
   /sk-[A-Za-z0-9]{32,}/,                     // OpenAI key
   /gsk_[A-Za-z0-9]{40,}/,                    // Groq key
   /AKIA[0-9A-Z]{16}/,                        // AWS access key
-  // Generici: richiede assegnamento con valore plausibile (8+ caratteri)
-  /(?:api[_-]?key|secret|password|token)\s*[:=]\s*['"][^'"]{8,}/i,
+  // Generici: assegnamento con valore plausibile (8+ caratteri), quote opzionali
+  // Cattura anche file .env tipo: API_KEY=sk123abc
+  /(?:api[_-]?key|secret|password|token)\s*[:=]\s*['"]?[^\s'"]{8,}/i,
 ];
 
 // Limite in caratteri UTF-16 (diff.length) — rinominato per chiarezza

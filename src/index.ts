@@ -1,10 +1,11 @@
 import * as p from "@clack/prompts";
+import Groq from "groq-sdk";
 import { getApiKey, saveApiKey, resetApiKey } from "./config.js";
 import { getStagedDiff, commitWithMessage, containsSecrets } from "./git.js";
 import { generateCommitMessages } from "./ai.js";
 import { askForApiKey, selectCommitMessage } from "./prompt.js";
 
-const VERSION = "0.1.0";
+declare const __VERSION__: string;
 
 function showHelp() {
   console.log(`
@@ -30,7 +31,7 @@ async function main() {
   const arg = process.argv[2];
 
   if (arg === "--help" || arg === "-h") { showHelp(); process.exit(0); }
-  if (arg === "--version" || arg === "-v") { console.log(VERSION); process.exit(0); }
+  if (arg === "--version" || arg === "-v") { console.log(__VERSION__); process.exit(0); }
   if (arg === "--reset-key") {
     resetApiKey();
     console.log("API key removed. Run commit-ai to set a new one.");
@@ -102,8 +103,8 @@ async function main() {
   } catch (err) {
     spinner.stop("Failed to generate messages.");
     const msg = err instanceof Error ? err.message : String(err);
-    // 401 → chiave revocata, offri reset
-    if (msg.includes("401") || msg.toLowerCase().includes("unauthorized") || msg.toLowerCase().includes("invalid api key")) {
+    // 401 → chiave revocata, offri reset (usa tipo SDK dove possibile)
+    if ((err instanceof Groq.APIError && err.status === 401) || msg.includes("401") || msg.toLowerCase().includes("unauthorized")) {
       p.log.error("Groq API key is invalid or revoked.");
       const reset = await p.confirm({ message: "Reset saved key and enter a new one?" });
       if (!p.isCancel(reset) && reset) {
