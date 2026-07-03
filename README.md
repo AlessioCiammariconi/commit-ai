@@ -2,7 +2,7 @@
 
 AI-powered git commit message generator. Reads your staged diff, generates 3 commit options in [Conventional Commits](https://www.conventionalcommits.org/) format, and lets you pick one — all in under 3 seconds.
 
-Powered by [Groq](https://groq.com) (Llama 3.3 70B). **Free tier — no credit card required.** Groq free plan includes 1,000 requests/day and 30 requests/minute per API key.
+Powered by [Groq](https://groq.com) (GPT-OSS 120B). **Free tier — no credit card required.** Groq free plan includes 1,000 requests/day and 30 requests/minute per API key.
 
 ```
 $ commit-ai
@@ -72,7 +72,7 @@ GROQ_API_KEY=gsk_... commit-ai
 ## How it works
 
 1. Runs `git diff --staged` to get your staged changes
-2. Sends the diff to Groq (Llama 3.3 70B) with a Conventional Commits prompt
+2. Sends the diff to Groq (GPT-OSS 120B) with a Conventional Commits prompt
 3. Parses the 3 returned options
 4. You pick one → `git commit -m` executes
 

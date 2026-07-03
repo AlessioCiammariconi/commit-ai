@@ -1,6 +1,6 @@
 import Groq from "groq-sdk";
 
-const MODEL = "llama-3.3-70b-versatile";
+const MODEL = "openai/gpt-oss-120b";
 
 const SYSTEM_PROMPT = `You are a git commit message generator.
 Given a git diff, generate exactly 3 commit message options following the Conventional Commits spec.
